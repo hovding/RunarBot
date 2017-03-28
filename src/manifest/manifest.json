@@ -1,0 +1,29 @@
+{
+  "$schema": "https://statics.teams.microsoft.com/sdk/v0.4/manifest/MicrosoftTeams.schema.json",
+  "manifestVersion": "0.4",
+  "id": "470375a1-a4b7-f0fe-2e74-f0255aad8667",
+  "version": "0.0.1",
+  "developer": {
+    "name": "Kjetil Hovding",
+    "websiteUrl": "https://runarbot.azurewebsites.net",
+    "privacyUrl": "https://runarbot.azurewebsites.net/privacy.html",
+    "termsOfUseUrl": "https://runarbot.azurewebsites.net/tou.html"
+  },
+  "tabs": [],
+  "bots": [
+    {
+      "mri": "0b0fd2e5-f13b-4ad3-a3b8-4c1212ad5c31",
+      "pinnedTabs": [
+        {
+          "id": "0334bd52-c61d-428b-d03b-ada8c779fbc4",
+          "definitionId": "fd189593-bccb-ca60-6930-8a4d98061ca0",
+          "displayName": "runarbot Tab",
+          "url": "https://runarbot.azurewebsites.net/runarbotTabTab.html",
+          "website": "https://runarbot.azurewebsites.net/runarbotTabTab.html"
+        }
+      ]
+    }
+  ],
+  "needsIdentity": false,
+  "validDomains": []
+}
