@@ -73,68 +73,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Default entry point for client scripts
-// Automatically generated
-// Please avoid from modifying to much...
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-// Added by generator-teams
-__export(__webpack_require__(1));
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const theme_1 = __webpack_require__(2);
-/**
- * Implementation of Bot pinned tab: runarbot Tab
- */
-class runarbotTabTab {
-    constructor() {
-        microsoftTeams.initialize();
-        theme_1.TeamsTheme.fix();
-    }
-    doStuff() {
-        microsoftTeams.getContext((context) => {
-            var a = document.getElementById('app');
-            if (a) {
-                // do something
-            }
-        });
-    }
-    getParameterByName(name, url) {
-        if (!url) {
-            url = window.location.href;
-        }
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
-        if (!results)
-            return '';
-        if (!results[2])
-            return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-}
-exports.runarbotTabTab = runarbotTabTab;
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -201,10 +144,153 @@ exports.TeamsTheme = TeamsTheme;
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Default entry point for client scripts
+// Automatically generated
+// Please avoid from modifying to much...
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+// Added by generator-teams
+__export(__webpack_require__(3));
+__export(__webpack_require__(4));
+// Added by generator-teams
+__export(__webpack_require__(2));
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const theme_1 = __webpack_require__(0);
+/**
+ * Implementation of Bot pinned tab: runarbot Bot Tab
+ */
+class runarbotBotTabTab {
+    constructor() {
+        microsoftTeams.initialize();
+        theme_1.TeamsTheme.fix();
+    }
+    doStuff() {
+        microsoftTeams.getContext((context) => {
+            var a = document.getElementById('app');
+            if (a) {
+                // do something
+            }
+        });
+    }
+    getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+        if (!results)
+            return '';
+        if (!results[2])
+            return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+}
+exports.runarbotBotTabTab = runarbotBotTabTab;
+
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(0);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const theme_1 = __webpack_require__(0);
+/**
+ * Implementation of runarbot Tab configuration page
+ */
+class runarbotTabConfigure {
+    constructor() {
+        microsoftTeams.initialize();
+        theme_1.TeamsTheme.fix();
+        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            var val = document.getElementById("data");
+            microsoftTeams.settings.setSettings({
+                contentUrl: "https://runarbot.azurewebsites.net/runarbotTabTab.html?data=" + val.value,
+                customSettings: val.value,
+                suggestedDisplayName: `runarbot`,
+                removeUrl: "https://runarbot.azurewebsites.net/remove.html",
+            });
+            saveEvent.notifySuccess();
+        });
+    }
+    setValidityState(val) {
+        microsoftTeams.settings.setValidityState(val);
+    }
+}
+exports.runarbotTabConfigure = runarbotTabConfigure;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const theme_1 = __webpack_require__(0);
+/**
+ * Implementation of the runarbot Tab content page
+ */
+class runarbotTabTab {
+    /**
+     * Constructor for runarbotTab that initializes the Microsoft Teams script and themes management
+     */
+    constructor() {
+        microsoftTeams.initialize();
+        theme_1.TeamsTheme.fix();
+    }
+    /**
+     * Method to invoke on page to start processing
+     * Add you custom implementation here
+     */
+    doStuff() {
+        microsoftTeams.getContext((context) => {
+            var a = document.getElementById('app');
+            if (a) {
+                a.innerHTML = `The value is: ${this.getParameterByName('data')}`;
+            }
+        });
+    }
+    /**
+     * Method for retrieving query string parameters
+     */
+    getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+        if (!results)
+            return '';
+        if (!results[2])
+            return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+}
+exports.runarbotTabTab = runarbotTabTab;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(1);
 
 
 /***/ })

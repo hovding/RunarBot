@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,13 +79,14 @@ module.exports = require("botbuilder");
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Express = __webpack_require__(4);
-const bodyParser = __webpack_require__(3);
-const http = __webpack_require__(5);
-const path = __webpack_require__(7);
-const morgan = __webpack_require__(6);
+const Express = __webpack_require__(5);
+const bodyParser = __webpack_require__(4);
+const http = __webpack_require__(6);
+const path = __webpack_require__(8);
+const morgan = __webpack_require__(7);
 const builder = __webpack_require__(0);
-const runarbot_1 = __webpack_require__(2);
+const runarbotBot_1 = __webpack_require__(2);
+const runarbotCustomBot_1 = __webpack_require__(3);
 let express = Express();
 let port = process.env.port || process.env.PORT || 3007;
 express.use(bodyParser.json());
@@ -97,8 +98,11 @@ let botSettings = {
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 };
-let bot = new runarbot_1.runarbot(new builder.ChatConnector(botSettings));
+let bot = new runarbotBot_1.runarbotBot(new builder.ChatConnector(botSettings));
 express.post('/api/messages', bot.Connector.listen());
+// Custom bot
+let customBot = new runarbotCustomBot_1.runarbotCustomBot();
+express.post('/api/customBot', customBot.requestHandler);
 // This is used to prevent your tabs from being embedded in other systems than Microsoft Teams
 express.use(function (req, res, next) {
     res.setHeader("Content-Security-Policy", "frame-ancestors teams.microsoft.com *.teams.microsoft.com *.skype.com");
@@ -142,9 +146,9 @@ http.createServer(express).listen(port, (err) => {
 Object.defineProperty(exports, "__esModule", { value: true });
 const builder = __webpack_require__(0);
 /**
- * Implementation for runarbot
+ * Implementation for runarbot Bot
  */
-class runarbot {
+class runarbotBot {
     /**
      * The constructor
      * @param connector
@@ -161,7 +165,7 @@ class runarbot {
      * @param session
      */
     defaultDialog(session) {
-        let text = runarbot.extractTextFromMessage(session.message);
+        let text = runarbotBot.extractTextFromMessage(session.message);
         if (text.startsWith('hello')) {
             session.send('Oh, hello to you as well!');
             return;
@@ -191,41 +195,77 @@ class runarbot {
         return s.trim();
     }
 }
-exports.runarbot = runarbot;
+exports.runarbotBot = runarbotBot;
 
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("body-parser");
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const builder = __webpack_require__(0);
+/**
+ * Implementation for runarbot Custom Bot
+ */
+class runarbotCustomBot {
+    /**
+     * The constructor
+     */
+    constructor() {
+    }
+    /**
+     * Implement your bot logic here
+     * @param req the Request
+     * @param res the Response
+     * @param next
+     */
+    requestHandler(req, res, next) {
+        // parse the incoming message
+        var incoming = req.body;
+        // create the response, any Teams compatible responses can be used
+        var message = new builder.Message();
+        message.text(`Echo ${incoming.text}`);
+        // send the message
+        res.send(message.toMessage());
+    }
+}
+exports.runarbotCustomBot = runarbotCustomBot;
+
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("express");
+module.exports = require("body-parser");
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("http");
+module.exports = require("express");
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
-module.exports = require("morgan");
+module.exports = require("http");
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("morgan");
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

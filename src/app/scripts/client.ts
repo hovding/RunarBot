@@ -4,4 +4,8 @@
 
 
 // Added by generator-teams
+export * from './runarbotTabConfig';
 export * from './runarbotTabTab';
+
+// Added by generator-teams
+export * from './runarbotBotTabTab';

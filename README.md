@@ -1,4 +1,4 @@
-# teamstab
+# runarbot
 
 Generate a Microsoft Teams extensibility solution.
 

@@ -9,8 +9,10 @@ import * as morgan from 'morgan';
 import * as builder from 'botbuilder';
 
 
-import { runarbot } from './runarbot';
+import { runarbotBot } from './runarbotBot';
 
+
+import { runarbotCustomBot } from './runarbotCustomBot';
 
 
 let express = Express();
@@ -30,10 +32,14 @@ let botSettings: builder.IChatConnectorSettings = {
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 };
 
-let bot = new runarbot(new builder.ChatConnector(botSettings));
+let bot = new runarbotBot(new builder.ChatConnector(botSettings));
 express.post('/api/messages', bot.Connector.listen());
 
 
+
+// Custom bot
+let customBot = new runarbotCustomBot();
+express.post('/api/customBot', customBot.requestHandler);
 
 
 
